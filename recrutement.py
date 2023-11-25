@@ -5,16 +5,7 @@ import os
 import pandas as pd
 import numpy as np
 
-# green - blue - white
-
-# finds most recent file in specified folder
-list_of_files = glob.glob(
-    os.path.join('/Users/nathan/Library/Application Support/Sports Interactive/Football Manager 2024/teamsFiles', '*'))
-latest_file = max(list_of_files, key=os.path.getctime)
-
-# Read HTML file exported by FM - in this case an example of an output from the squad page
-# This reads as a list, not a dataframe
-df_list = pd.read_html(latest_file, header=0, encoding="utf-8", keep_default_na=False)
+df_list = pd.read_html("C:/Users/natha/OneDrive/Documents/Sports Interactive/Football Manager 2024/Untitled.html", header=0, encoding="utf-8", keep_default_na=False)
 
 # turn the list into a dataframe
 df = df_list[0]
@@ -67,12 +58,6 @@ df['wb_blue'] = ( df['Fir'] + df['Pas'] + df['Tec'] + df['Ant'] + df['Cnt'] + df
 df['wb'] =( ( ( df['wb_key'] * 5) + (df['wb_green'] * 3) + (df['wb_blue'] * 1) ) / 47)
 
 
-# calculates Ball_playing_defender_Cover score
-df['bpdc_key'] = ( df['Acc'] + df['Pac'] + df['Jum'] + df['Cmp'] )
-df['bpdc_green'] = ( df['Mar'] + df['Pas'] + df['Tck'] + df['Pos'] + df['Ant'] + df['Cnt'] + df['Dec'] )
-df['bpdc_blue'] = ( df['Fir'] + df['Tec'] + df['Bra'] + df['Vis'] + df['Str'] + df['Hea'] )
-df['bpdc'] =( ( ( df['bpdc_key'] * 5) + (df['bpdc_green'] * 3) + (df['bpdc_blue'] * 1) ) / 47)
-
 
 # calculates Ball_playing_defender_Defend score
 df['bpdd_key'] = ( df['Acc'] + df['Pac'] + df['Jum'] + df['Cmp'] )
@@ -81,32 +66,37 @@ df['bpdd_blue'] = ( df['Fir'] + df['Tec'] + df['Agg'] + df['Ant'] + df['Bra'] + 
 df['bpdd'] =( ( ( df['bpdd_key'] * 5) + (df['bpdd_green'] * 3) + (df['bpdd_blue'] * 1) ) / 46)
 
 
-# calculates Deep_lying_playmaker_Defend score
-df['dlpd_key'] = ( df['Wor'] + df['Sta'] + df['Acc'] + df['Pac'] )
-df['dlpd_green'] = ( df['Fir'] + df['Pas'] + df['Tec'] + df['Cmp'] + df['Dec'] + df['Tea'] + df['Vis'] )
-df['dlpd_blue'] = ( df['Tck'] + df['Ant'] + df['Pos'] + df['Bal'] )
-df['dlpd'] =( ( ( df['dlpd_key'] * 5) + (df['dlpd_green'] * 3) + (df['dlpd_blue'] * 1) ) / 45)
+# calculates Ball_winning_midfielder_Support score
+df['bwms_key'] = ( df['Wor'] + df['Sta'] + df['Acc'] + df['Pac'] )
+df['bwms_green'] = ( df['Tck'] + df['Agg'] + df['Ant'] + df['Tea'] )
+df['bwms_blue'] = ( df['Mar'] + df['Pas'] + df['Bra'] + df['Cnt'] + df['Agi'] + df['Str'] )
+df['bwms'] =( ( ( df['bwms_key'] * 5) + (df['bwms_green'] * 3) + (df['bwms_blue'] * 1) ) / 38)
+df.bwms= df.bwms.round(1)
 
 
-# calculates Segundo_volante_Attack score
-df['vola_key'] = ( df['Wor'] + df['Sta'] + df['Acc'] + df['Pac'] )
-df['vola_green'] = ( df['Fin'] + df['Lon'] + df['Pas'] + df['Tck'] + df['Ant'] + df['OtB'] + df['Pos'] )
-df['vola_blue'] = ( df['Fir'] + df['Mar'] + df['Cmp'] + df['Cnt'] + df['Dec'] + df['Bal'] )
-df['vola'] =( ( ( df['vola_key'] * 5) + (df['vola_green'] * 3) + (df['vola_blue'] * 1) ) / 47)
+# calculates Box_to_box_midfielder_Support score
+df['b2bs_key'] = ( df['Acc'] + df['Pac'] + df['Sta'] + df['Wor'] )
+df['b2bs_green'] = ( df['Pas'] + df['Tck'] + df['OtB'] + df['Tea'] )
+df['b2bs_blue'] = ( df['Dri'] + df['Fin'] + df['Fir'] + df['Lon'] + df['Tec'] + df['Agg'] + df['Ant'] + df['Cmp'] + df['Dec'] + df['Pos'] + df['Bal'] + df['Str'] )
+df['b2bs'] =( ( ( df['b2bs_key'] * 5) + (df['b2bs_green'] * 3) + (df['b2bs_blue'] * 1) ) / 44)
+df.b2bs= df.b2bs.round(1)
 
 
-# calculates Advanced_playmaker_Support score
-df['aps_key'] = ( df['Acc'] + df['Pac'] + df['Sta'] + df['Wor'] )
-df['aps_green'] = ( df['Fir'] + df['Pas'] + df['Tec'] + df['Cmp'] + df['Dec'] + df['OtB'] + df['Tea'] + df['Vis'] )
-df['aps_blue'] = ( df['Dri'] + df['Ant'] + df['Fla'] + df['Agi'] )
-df['aps'] =( ( ( df['aps_key'] * 5) + (df['aps_green'] * 3) + (df['aps_blue'] * 1) ) / 48)
+# calculates Trequartista_Attack score
+df['trea_key'] = ( df['Acc'] + df['Pac'] + df['Fin'] )
+df['trea_green'] = ( df['Dri'] + df['Fir'] + df['Pas'] + df['Tec'] + df['Cmp'] + df['Dec'] + df['Fla'] + df['OtB'] + df['Vis'] )
+df['trea_blue'] = ( df['Ant'] + df['Agi'] + df['Bal'] )
+df['trea'] =( ( ( df['trea_key'] * 5) + (df['trea_green'] * 3) + (df['trea_blue'] * 1) ) / 45)
+df.trea= df.trea.round(1)
 
 
 # calculates Inside_forward_Attack score
-df['ifa_key'] = ( df['Acc'] + df['Pac'] + df['Sta'] + df['Wor'] )
-df['ifa_green'] = ( df['Dri'] + df['Fin'] + df['Fir'] + df['Tec'] + df['Ant'] + df['OtB'] + df['Agi'] )
-df['ifa_blue'] = ( df['Lon'] + df['Pas'] + df['Cmp'] + df['Fla'] + df['Bal'] )
-df['ifa'] =( ( ( df['ifa_key'] * 5) + (df['ifa_green'] * 3) + (df['ifa_blue'] * 1) ) / 46)
+# calculates Inside_forward_Support score
+df['ifs_key'] = ( df['Acc'] + df['Pac'] + df['Sta'] + df['Wor'] )
+df['ifs_green'] = ( df['Dri'] + df['Fin'] + df['Fir'] + df['Tec'] + df['OtB'] + df['Agi'] )
+df['ifs_blue'] = ( df['Lon'] + df['Pas'] + df['Ant'] + df['Cmp'] + df['Fla'] + df['Vis'] + df['Bal'] )
+df['ifs'] =( ( ( df['ifs_key'] * 5) + (df['ifs_green'] * 3) + (df['ifs_blue'] * 1) ) / 45)
+df.ifs= df.ifs.round(1)
 
 
 # calculates Advanced_forward_Attack score
@@ -118,17 +108,15 @@ df['str'] =( ( ( df['str_key'] * 5) + (df['str_green'] * 3) + (df['str_blue'] * 
 
 # builds squad dataframe using only columns that will be exported to HTML
 # builds squad dataframe using only columns that will be exported to HTML
+
+positionList : list = "gk wb bpdd bwms b2bs trea ifs str".split(' ')
 squad = df[
-    ['Name', 'Age', 'Club', 'Transfer Value', 'Wage', 'Position', 'dlpd', "vola"]]
+    ['Name', 'Age', 'Club', 'Transfer Value', 'Wage', 'Position']+positionList]
 
 
+for k in positionList : 
+    squad[k] = squad[k].apply(lambda x: round(x,1))
 
-# squad['cb'] = np.series(squad['cb'].apply(lambda x: round(x, 1)))
-def trueRound(val):
-    return round(val, 1)
-
-squad['dlpd'] = squad['dlpd'].apply(lambda x: round(x, 1))
-squad['vola'] = squad['vola'].apply(lambda x: round(x, 1))
 
 
 # taken from here: https://www.thepythoncode.com/article/convert-pandas-dataframe-to-html-table-python
@@ -187,8 +175,5 @@ import webbrowser
 
 new = 2  # open in a new tab, if possible
 # open an HTML file on my own (Windows) computer
-url = "file:///Users/nathan/Documents/Code/PYTHON/FM/" + filename
+url = "C:/Users/natha/OneDrive/Documents/Code/FM/" + filename
 webbrowser.open(url, new=new)
-
-macos_filename = (
-            "/Users/nathan/Library/Application Support/Sports Interactive/Football Manager 2024/teamsFiles" + filename)
