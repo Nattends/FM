@@ -1,0 +1,60 @@
+body {
+    background-color: #1e1e1e;
+    color: white ;
+    font: 1.2rem "Fira Sans", sans-serif;
+    display: flex ; 
+    justify-content: center;
+}
+
+table, table th  {
+    text-align: center;
+} 
+
+tr:nth-child(even) {
+    background-color: #2d2d2d;
+    width: 80vw ; 
+}
+
+tbody > tr.highlight > td {
+    background: #ececec;
+    color: #1e1e1e;
+}
+
+
+/* Position */
+td {
+    width: 10vw; 
+}
+
+/* Nom */
+td:first-child {
+    width: 12vw; 
+}
+
+/* Âge */
+td:nth-child(2) {
+    width: 1vw; 
+}
+
+/* Club */
+td:nth-child(3) {
+    width: 12vw; 
+}
+
+/* Transfer Value */
+td:nth-child(4) {
+    width: 10vw;
+}
+
+/* Wage */
+td:nth-child(5) {
+    width: 10vw;
+}
+
+/* Position */
+td:nth-child(6) {
+    width: 8vw;
+}
+
+
+
