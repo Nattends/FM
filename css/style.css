@@ -56,5 +56,12 @@ td:nth-child(6) {
     width: 8vw;
 }
 
+#table_filter {
+    margin-top: 1vh ;
+    margin-bottom: 1vh ;
+    width: 5vw ;
+    height: 2vh;
+}
+
 
 

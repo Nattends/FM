@@ -1,0 +1,8 @@
+.idea/
+.vscode/
+__pycache__/
+html/
+test.html
+test.py
+test.txt
+venv/
